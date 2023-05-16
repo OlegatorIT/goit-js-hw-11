@@ -86,10 +86,6 @@ function onSearchContent(e) {
       isLoading = false;
       new SimpleLightbox('.photo-link');
       window.addEventListener('scroll', throttledHandleScroll);
-
-      if (data.totalHits <= 40) {
-        fetchPictures.show(messageTheEnd);
-      }
     })
     .catch(e => {
       if (e.code === 'ERR_BAD_REQUEST') {

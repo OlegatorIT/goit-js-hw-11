@@ -6,9 +6,7 @@ body {
 
 .search-form {
 
-    position: fixed;
-    width: 100%;
-    top: 0;
+
     display: flex;
     justify-content: center;
     gap: 10px;
@@ -85,7 +83,7 @@ body {
     line-height: 1.5;
 }
 
-.wrapper-btn {
+.wrapper {
     margin: 20px;
     text-align: center;
 
@@ -93,4 +91,10 @@ body {
 
 .hide {
     display: none;
+}
+
+.wrapper-gif {
+    display: flex;
+    justify-content: center;
+
 }

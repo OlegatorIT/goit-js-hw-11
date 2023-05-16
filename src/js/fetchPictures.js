@@ -9,13 +9,12 @@ export class FetchPictures {
       image_type: 'photo',
       orientation: 'horizontal',
       safesearch: true,
-      per_page: 200,
+      per_page: 40,
     },
   };
   constructor() {
     this.page = 1;
     this.value = '';
-    this.search = false;
   }
 
   async fetchPictures() {
@@ -31,8 +30,6 @@ export class FetchPictures {
   }
 
   message = {
-    the_end:
-      "<h2 class='gallery-text'>We're sorry, but you've reached the end of search results.</h2>",
     try_again:
       'Sorry, there are no images matching your search query. Please try again.',
   };
@@ -43,6 +40,10 @@ export class FetchPictures {
 
   show(el) {
     el.classList.contains('hide') && el.classList.remove('hide');
+  }
+
+  amountImg(box) {
+    return box.children.length;
   }
 
   createMarkup(arr) {

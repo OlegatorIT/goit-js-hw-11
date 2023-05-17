@@ -72,7 +72,10 @@ function onSearchContent(e) {
     .fetchPictures()
     .then(data => {
       const imagesArr = data.hits;
-      if (data.totalHits === fetchPictures.amountImg(boxImg)) {
+      if (
+        data.totalHits === fetchPictures.amountImg(boxImg) ||
+        imagesArr.length === 0
+      ) {
         fetchPictures.hide(messageTheEnd);
         fetchPictures.hide(gifEl);
         boxImg.innerHTML = '';

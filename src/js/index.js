@@ -9,6 +9,7 @@ import throttle from 'lodash.throttle';
 const fetchPictures = new FetchPictures();
 const throttledHandleScroll = throttle(handleScroll, 300);
 let isLoading = false;
+const gallery = new SimpleLightbox('.photo-link');
 
 const searchForm = document.getElementById('search-form');
 const boxImg = document.querySelector('.gallery');
@@ -47,7 +48,7 @@ function fetchPicturesMore() {
         fetchPictures.createMarkup(imagesArr)
       );
 
-      new SimpleLightbox('.photo-link').refresh();
+      gallery.refresh();
       isLoading = false;
       fetchPictures.hide(gifEl);
     })
@@ -63,10 +64,14 @@ function fetchPicturesMore() {
 
 function onSearchContent(e) {
   e.preventDefault();
-  fetchPictures.show(gifEl);
+  fetchPictures.page = 1;
   fetchPictures.hide(messageTheEnd);
   fetchPictures.value = searchForm.elements.searchQuery.value.trim();
-  if (fetchPictures.value === '') return;
+  if (fetchPictures.value === '') {
+    fetchPictures.hide(gifEl);
+    return;
+  }
+  fetchPictures.show(gifEl);
 
   fetchPictures
     .fetchPictures()
@@ -87,7 +92,7 @@ function onSearchContent(e) {
       boxImg.innerHTML = fetchPictures.createMarkup(imagesArr);
       fetchPictures.hide(gifEl);
       isLoading = false;
-      new SimpleLightbox('.photo-link');
+      gallery.refresh();
       window.addEventListener('scroll', throttledHandleScroll);
     })
     .catch(e => {
